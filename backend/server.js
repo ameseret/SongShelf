@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import pool from "./db.js";
+import pool from "./config/db.js";
 
 dotenv.config();
 
@@ -42,6 +42,36 @@ app.post("/songs", async (req, res) => {
     );
 
     res.status(201).json(result.rows[0]); // return the new song
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// PUT /songs/:id - update a song by ID
+app.put("/songs/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, artist, album, release_year } = req.body;
+
+    // Validate required fields
+    if (!title || !artist) {
+      return res.status(400).json({ error: "Title and artist are required" });
+    }
+
+    const result = await pool.query(
+      `UPDATE songs
+       SET title = $1, artist = $2, album = $3, release_year = $4
+       WHERE id = $5
+       RETURNING *`,
+      [title, artist, album, release_year, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+
+    res.json(result.rows[0]); // return updated song
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server error" });
