@@ -78,6 +78,27 @@ app.put("/songs/:id", async (req, res) => {
   }
 });
 
+// DELETE /songs/:id - delete a song by ID
+app.delete("/songs/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      "DELETE FROM songs WHERE id = $1 RETURNING *",
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+
+    res.json({ message: "Song deleted successfully", song: result.rows[0] });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
