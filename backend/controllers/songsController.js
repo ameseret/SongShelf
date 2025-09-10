@@ -31,6 +31,9 @@ export const getSongById = async (req, res) => {
 // POST create a new song
 export const createSong = async (req, res) => {
   try {
+
+    console.log("🎵 New song request:", req.body);
+
     const { title, artist, album, release_year } = req.body;
     const result = await pool.query(
       "INSERT INTO songs (title, artist, album, release_year) VALUES ($1, $2, $3, $4) RETURNING *",
@@ -48,6 +51,9 @@ export const createSong = async (req, res) => {
 export const updateSong = async (req, res) => {
   try {
     const { id } = req.params;
+  
+    console.log(`Update request for song ID ${id}:`, req.body);
+
     const { title, artist, album, release_year } = req.body;
 
     const result = await pool.query(
