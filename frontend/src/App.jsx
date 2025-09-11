@@ -3,6 +3,7 @@ import SongsPage from "./pages/SongsPage";
 import AddSongPage from "./pages/AddSongPage";
 import EditSongPage from "./pages/EditSongPage";
 import PlaylistsPage from "./pages/PlaylistsPage"; 
+import PlaylistDetailPage from "./pages/PlaylistDetailPage"; 
 
 export default function App() {
   return (
@@ -11,7 +12,7 @@ export default function App() {
         <nav style={{ display: "flex", gap: 12 }}>
           <Link to="/">All Songs</Link>
           <Link to="/add">Add Song</Link>
-          <Link to="/playlists">Playlists</Link> 
+          <Link to="/playlists">Playlists</Link>
         </nav>
       </header>
 
@@ -19,7 +20,8 @@ export default function App() {
         <Route path="/" element={<SongsPage />} />
         <Route path="/add" element={<AddSongPage />} />
         <Route path="/edit/:id" element={<EditSongPage />} />
-        <Route path="/playlists" element={<PlaylistsPage />} /> 
+        <Route path="/playlists" element={<PlaylistsPage />} />
+        <Route path="/playlists/:id" element={<PlaylistDetailPage />} /> 
       </Routes>
     </BrowserRouter>
   );
