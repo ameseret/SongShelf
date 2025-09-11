@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";   // ✅ import Link for navigation
 import api from "../services/api";
 
 export default function SongsPage() {
@@ -49,7 +50,7 @@ export default function SongsPage() {
               <th align="left">Artist</th>
               <th align="left">Album</th>
               <th align="left">Year</th>
-              <th />
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -60,6 +61,9 @@ export default function SongsPage() {
                 <td>{s.album || "—"}</td>
                 <td>{s.release_year || "—"}</td>
                 <td>
+                  <Link to={`/edit/${s.id}`} style={{ marginRight: 8 }}>
+                    Edit
+                  </Link>
                   <button onClick={() => deleteSong(s.id)}>Delete</button>
                 </td>
               </tr>

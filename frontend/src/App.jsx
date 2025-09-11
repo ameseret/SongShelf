@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import SongsPage from "./pages/SongsPage";
 import AddSongPage from "./pages/AddSongPage";
+import EditSongPage from "./pages/EditSongPage";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<SongsPage />} />
         <Route path="/add" element={<AddSongPage />} />
+        <Route path="/edit/:id" element={<EditSongPage />} />
       </Routes>
     </BrowserRouter>
   );
