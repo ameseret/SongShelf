@@ -1,7 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors"; // ✅ add this
+import cors from "cors";
+
 import songsRoutes from "./routes/songs.js";
+import playlistsRoutes from "./routes/playlists.js"; // ✅ import playlists
 
 // Load environment variables
 dotenv.config();
@@ -14,8 +16,9 @@ app.use(express.json());
 
 // Routes
 app.use("/songs", songsRoutes);
+app.use("/playlists", playlistsRoutes); // ✅ add playlists
 
-// Health check route
+// Health check route 
 app.get("/", (req, res) => {
   res.send("🎵 SongShelf API is running");
 });
