@@ -62,9 +62,17 @@ export default function SongsPage() {
                 key={s.id}
                 className="bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition transform hover:-translate-y-1"
               >
-                {/* Artwork placeholder (replace with real image later) */}
+                {/* Artwork (real image if available, otherwise placeholder) */}
                 <div className="bg-gray-700 h-40 flex items-center justify-center">
-                  <span className="text-4xl text-gray-400">🎵</span>
+                  {s.artwork_url ? (
+                    <img
+                      src={s.artwork_url}
+                      alt={`${s.title} cover`}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-4xl text-gray-400">🎵</span>
+                  )}
                 </div>
 
                 {/* Song info */}

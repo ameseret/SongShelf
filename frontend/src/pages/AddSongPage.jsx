@@ -34,60 +34,82 @@ export default function AddSongPage() {
   };
 
   return (
-    <main style={{ padding: 16, maxWidth: 500 }}>
-      <h1>Add Song</h1>
-      {error && <p style={{ color: "crimson" }}>{error}</p>}
+    <main className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-6">
+      <div className="w-full max-w-lg bg-gray-800 rounded-lg shadow-lg p-8">
+        <h1 className="text-3xl font-extrabold text-center text-blue-400 mb-6">
+          Add New Song
+        </h1>
 
-      <form onSubmit={onSubmit} style={{ display: "grid", gap: 12 }}>
-        <label>
-          Title
-          <input
-            name="title"
-            value={form.title}
-            onChange={onChange}
-            required
-          />
-        </label>
+        {error && (
+          <p className="text-red-400 mb-4 text-center font-medium">{error}</p>
+        )}
 
-        <label>
-          Artist
-          <input
-            name="artist"
-            value={form.artist}
-            onChange={onChange}
-            required
-          />
-        </label>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold mb-1">Title</label>
+            <input
+              name="title"
+              value={form.title}
+              onChange={onChange}
+              required
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-        <label>
-          Album
-          <input
-            name="album"
-            value={form.album}
-            onChange={onChange}
-            placeholder="Optional"
-          />
-        </label>
+          <div>
+            <label className="block text-sm font-semibold mb-1">Artist</label>
+            <input
+              name="artist"
+              value={form.artist}
+              onChange={onChange}
+              required
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-        <label>
-          Release Year
-          <input
-            type="number"
-            name="release_year"
-            value={form.release_year}
-            onChange={onChange}
-            min="1900"
-            max={new Date().getFullYear()}
-          />
-        </label>
+          <div>
+            <label className="block text-sm font-semibold mb-1">Album</label>
+            <input
+              name="album"
+              value={form.album}
+              onChange={onChange}
+              placeholder="Optional"
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-        <div style={{ display: "flex", gap: 8 }}>
-          <button type="submit">Save</button>
-          <button type="button" onClick={() => navigate("/")}>
-            Cancel
-          </button>
-        </div>
-      </form>
+          <div>
+            <label className="block text-sm font-semibold mb-1">
+              Release Year
+            </label>
+            <input
+              type="number"
+              name="release_year"
+              value={form.release_year}
+              onChange={onChange}
+              min="1900"
+              max={new Date().getFullYear()}
+              className="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex justify-between mt-6">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition-colors"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate("/")}
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
   );
 }
